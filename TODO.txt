@@ -1,7 +1,7 @@
 ---TODO---
 
-1. Player Enum/Structs
+1. Player Enum/Structs DONE
 2. Player Attribute allocation
-3. Slot implementation
+3. Slot implementation DONE
 4. Slot attack logic
 5. Attack implementation
