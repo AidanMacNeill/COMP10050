@@ -10,7 +10,7 @@
 #include <time.h>
 #include <string.h>
 #include <stdbool.h>
- #include "functions.h" // TODO***********
+#include "functions.h" //
 
 int main(void)
 {
@@ -56,7 +56,7 @@ int main(void)
 	printf("All Players\n");
 	for(a=0; a<numPlayers; a++)
 	{
-		playerStats(players[a], playerType);
+		//playerStats(players, playerType, numPlayers);
 		printf("\nPlayer %d\n Name: %s\n Class: %s\n", a+1, players[a].name, players[a].type); // Refer to values in each variable in the struct
 		printf("---Stats---\nMagic: %d\nSmartness: %d\nStrength: %d\nDexterity: %d\nLuck: %d\n", players[a].magic, players[a].smartness, players[a].strength, players[a].dexterity, players[a].luck);
 		printf("---Slots---\n Starting Position: %d\n", players[a].pos);
@@ -70,7 +70,7 @@ int main(void)
 		{
 			if(c==1)
 			{
-				playerMove(players, slots, numSlots, c, a);
+				//playerMove(players, slots, numSlots, c, a);
 			}
 			else if(c==2)
 			{

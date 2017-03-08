@@ -1,7 +1,7 @@
 /*
  * functions.h
  *
- *  Created on: 6 Mar 2017
+ *  Created on: 4 Mar 2017
  *      Author: aidan
  */
 
@@ -25,18 +25,18 @@ struct player
 
 struct slot
 {
-	int slotNum;
+	int id;
 	char type[MAX_SIZE];
 	bool occupied;
 };
 
-void assignSlots(int numSlots, char* slotsArray[], struct slot slots[]); //TODO test
+void assignSlots(int numSlots, char* slotsType[], struct slot slots[]); //TODO test
 
 void playerPosition(int numPlayers, int numSlots, struct player players[], struct slot slots[]);
 
 void playerInit(int numPlayers, struct player players[], char* playerType[]);
 
-void playerStats(struct player player[], char* playerType[], int numPlayers);
+void playerStats(struct player players[], char* playerType[], int numPlayers);
 
 void playerMove(struct player players[], struct slot slots[], int numSlots, int c, int i);
 #endif /* FUNCTIONS_H_ */
