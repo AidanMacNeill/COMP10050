@@ -50,24 +50,28 @@ int main(void)
 	char* slotsType[3]={"Level Ground", "City", "Hill"};
 
 	assignSlots(numSlots, slotsType, slots); // Assigns slot type randomly to each slot
+
 	playerPosition(numPlayers, numSlots, players, slots); // Assigns players randomly to unique positions
+
 	playerInit(numPlayers, players, playerType); // Sets up each player type
+
 
 	printf("All Players\n");
 	for(a=0; a<numPlayers; a++)
 	{
-		//playerStats(players, playerType, numPlayers);
-		printf("\nPlayer %d\n Name: %s\n Class: %s\n", a+1, players[a].name, players[a].type); // Refer to values in each variable in the struct
-		printf("---Stats---\nMagic: %d\nSmartness: %d\nStrength: %d\nDexterity: %d\nLuck: %d\n", players[a].magic, players[a].smartness, players[a].strength, players[a].dexterity, players[a].luck);
-		printf("---Slots---\n Starting Position: %d\n", players[a].pos);
+		printf("\nPlayer %d\nName: %s\nClass: %s\n", a+1, players[a].name, players[a].type); // Refer to values in each variable in the struct
+		printf("---Stats---\nHealth: %d\nMagic: %d\nSmartness: %d\nStrength: %d\nDexterity: %d\nLuck: %d\n", players[a].health, players[a].magic, players[a].smartness, players[a].strength, players[a].dexterity, players[a].luck);
+		printf("---Slots---\nStarting Position: %d\n", players[a].pos);
 	}
 
 	printf("\n---Let the game begin!---\n");
 	for(a=0; a<numPlayers; a++)
 	{
 		printf("%s, would you like to:\n[1]Move\n[2]Attack\n", players[a].name);
+
 		while(c<0)
 		{
+			scanf("%d", &c);
 			if(c==1)
 			{
 				//playerMove(players, slots, numSlots, c, a);

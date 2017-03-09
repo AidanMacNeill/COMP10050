@@ -35,7 +35,7 @@ void playerPosition(int numPlayers, int numSlots, struct player players[], struc
 			j=rand()%numSlots;
 		}
 		players[i].pos=j;
-		slots[j].occupied=true; // Marks the slot as being occupied once a player is in it
+		//slots[j].occupied=true; // Marks the slot as being occupied once a player is in it
 	}
 }
 
@@ -47,12 +47,76 @@ void playerInit(int numPlayers, struct player players[], char* playerType[])
 		scanf(" %[^\n]", players[i].name); // " %[^\n]" scans everything until the enter key is pressed, including spaces and \n characters
 		printf("Choose the class for player %d:\n[1] Elf\n[2] Human\n[3] Ogre\n[4] Wizard\n", i+1);
 		scanf("%d", &c);
-		strcpy(players[i].type, playerType[c-1]);
-
+		strcpy(players[i].type, playerType[c-1]); // Take 1 away as this then corresponds with the values of the array pointers for playerType
 	}
+	playerStats(players, playerType, numPlayers);
 }
 
+void playerStats(struct player player[], char* playerType[], int numPlayers)
+{
+	for(i=0; i<numPlayers; i++)
+	{
+		for(j=0; j<4; j++) // Checks the class the player has
+		{
+			if(strcmp(player[j].type, playerType[i])==0) // Chooses the correct case for the player type
+			{
+				switch(j)
+				{
+				case 0: // Elf
+					player[i].health=100;
+					player[i].magic=51+(rand()%29);
+					player[i].smartness=70+(rand()%31);
+					player[i].strength=1+(rand()%50);
+					player[i].dexterity=1+(rand()%100);
+					player[i].luck=60+(rand()%41);
+					break;
 
+				case 1: // Human
+					player[i].health=100;
+					player[i].dexterity=1+(rand()%100);
+					player[i].luck=1+(rand()%100);
+					if(player[i].dexterity+player[i].luck > 102)
+					{
+						player[i].magic=1+(rand()%100); // Stop the attributes from exceeding the cap for the Human type
+					}
+					else
+					{
+						player[i].magic=1+(rand()%98);
+					}
+					player[i].smartness=1+(rand()%(299-player[i].dexterity-player[i].luck-player[i].magic));
+					if(player[i].smartness>100)
+					{
+						player[i].smartness=100;
+					}
+					player[i].strength=1+(rand()%(299-player[i].dexterity-player[i].luck-player[i].magic-player[i].smartness));
+					if(player[i].strength>100)
+					{
+						player[i].strength=100;
+					}
+					break;
+
+				case 2: // Ogre
+					player[i].health=100;
+					player[i].magic=0;
+					player[i].smartness=1+(rand()%20);
+					player[i].strength=80+(rand()%21);
+					player[i].dexterity=80+(rand()%21);
+					player[i].luck=1+(rand()%(50-player[i].smartness));
+					break;
+
+				case 3: // Wizards
+					player[i].health=100;
+					player[i].magic=80+(rand()%21);
+					player[i].smartness=90+(rand()%11);
+					player[i].strength=1+(rand()%20);
+					player[i].dexterity=1+(rand()%100);
+					player[i].luck=50+(rand()%51);
+					break;
+				}
+			}
+		}
+	}
+}
 
 
 
