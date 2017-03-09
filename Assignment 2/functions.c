@@ -58,7 +58,7 @@ void playerStats(struct player player[], char* playerType[], int numPlayers)
 	{
 		for(j=0; j<4; j++) // Checks the class the player has
 		{
-			if(strcmp(player[j].type, playerType[i])==0) // Chooses the correct case for the player type
+			if(strcmp(player[i].type, playerType[j])==0) // Chooses the correct case for the player type
 			{
 				switch(j)
 				{
