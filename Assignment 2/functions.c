@@ -161,14 +161,14 @@ void playerMove(struct player players[], struct slot slots[], int numSlots, int 
 				slots[players[a].pos].occupied=false;
 				players[a].pos--;
 				slots[players[a].pos].occupied=true;
-				printf("You have moved to the left.\nYou are now in position %d and type %s.\n", players[a].pos+1, slots[players[a].pos].type);
+				printf("You have moved to the left.\nYou are now in position %d of type %s.\n", players[a].pos+1, slots[players[a].pos].type);
 			}
 			else if(moveChoice==2) // Move to the right
 			{
 				slots[players[a].pos].occupied=false;
 				players[a].pos++;
 				slots[players[a].pos].occupied=true;
-				printf("You have moved to the right.\nYou are now in position %d and type %s.\n", players[a].pos+1, slots[players[a].pos].type);
+				printf("You have moved to the right.\nYou are now in position %d of type %s.\n", players[a].pos+1, slots[players[a].pos].type);
 			}
 			else
 			{
@@ -179,5 +179,63 @@ void playerMove(struct player players[], struct slot slots[], int numSlots, int 
 	}
 }
 
+void playerMoveStats(struct player players[], struct slot slots[], char* slotsType[], int a)
+{
+	if(strcmp(slots[players[a].pos].type, slotsType[0])==0) // If player has moved onto level ground
+	{
+		printf("Your stats have not changed.\n");
+	}
+	else if(strcmp(slots[players[a].pos].type, slotsType[1])==0) // If player has moved onto a Hill
+	{
+		if(players[a].dexterity<50)
+		{
+			players[a].strength-=10;
+			playerStatsBoundary(&players[a].strength);
+			printf("You lost 10 strength points, you now have %d.\n", players[a].strength);
+		}
+		else if(players[a].dexterity>=60)
+		{
+			players[a].strength+=10;
+			playerStatsBoundary(&players[a].strength);
+			printf("You gained 10 strength points, you now have %d.\n", players[a].strength);
+		}
+		else
+		{
+			printf("Your stats have not changed.\n");
+		}
+	}
+	else if(strcmp(slots[players[a].pos].type, slotsType[2])==0) // If player moves onto a City tile
+	{
+		if(players[a].smartness>60)
+		{
+			players[a].magic+=10;
+			playerStatsBoundary(&players[a].magic);
+			printf("You gained 10 magic points, you now have %d.\n", players[a].magic);
+		}
+		else if(players[a].smartness<=50)
+		{
+			players[a].dexterity-=10;
+			playerStatsBoundary(&players[a].dexterity);
+			printf("You lost 10 dexterity points, you now have %d.\n", players[a].dexterity);
+		}
+		else
+		{
+			printf("Your stats have not changed.\n");
+		}
+	}
+}
 
-
+void playerStatsBoundary(int *x)
+{
+	if (*x<1)
+	{
+		*x=1; // If values go under 1, set value back to 1
+	}
+	else if(*x>100)
+	{
+		*x=100; // If values go over 100, set value back to 100
+	}
+	else
+	{
+	}
+}

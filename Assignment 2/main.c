@@ -47,7 +47,7 @@ int main(void)
 	struct player players[numPlayers]; // Declare structure for each of the players in the game
 	struct slot slots[numSlots]; // Declare structure for the slots in the game
 	char* playerType[4]={"Elf", "Human", "Ogre", "Wizard"}; // Declare pointer arrays for each of the player types and slot types to be assigned later
-	char* slotsType[3]={"Level Ground", "City", "Hill"};
+	char* slotsType[3]={"Level Ground", "Hill", "City"};
 
 	assignSlots(numSlots, slotsType, slots); // Assigns slot type randomly to each slot
 
@@ -61,13 +61,13 @@ int main(void)
 	{
 		printf("\nPlayer %d\nName: %s\nClass: %s\n", a+1, players[a].name, players[a].type); // Refer to values in each variable in the struct
 		printf("---Stats---\nHealth: %d\nMagic: %d\nSmartness: %d\nStrength: %d\nDexterity: %d\nLuck: %d\n", players[a].health, players[a].magic, players[a].smartness, players[a].strength, players[a].dexterity, players[a].luck);
-		printf("---Slots---\nStarting Position: %d\n", players[a].pos);
+		printf("---Slots---\nStarting Position: %d\n", players[a].pos+1);
 	}
 
 	printf("\n---Let the game begin!---\n");
 	for(a=0; a<numPlayers; a++)
 	{
-		printf("%s, would you like to:\n[1]Move\n[2]Attack\n", players[a].name);
+		printf("\n%s, would you like to:\n[1]Move\n[2]Attack\n", players[a].name);
 
 		while(c<0)
 		{
@@ -75,6 +75,7 @@ int main(void)
 			if(c==1)
 			{
 				playerMove(players, slots, numSlots, &c, a);
+				playerMoveStats(players, slots, slotsType, a);
 			}
 			else if(c==2)
 			{
