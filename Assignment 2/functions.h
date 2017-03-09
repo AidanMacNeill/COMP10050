@@ -38,5 +38,5 @@ void playerInit(int numPlayers, struct player players[], char* playerType[]);
 
 void playerStats(struct player player[], char* playerType[], int numPlayers);
 
-void playerMove(struct player players[], struct slot slots[], int numSlots, int c, int i);
+void playerMove(struct player players[], struct slot slots[], int numSlots, int *c, int a);
 #endif /* FUNCTIONS_H_ */

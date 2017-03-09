@@ -74,7 +74,7 @@ int main(void)
 			scanf("%d", &c);
 			if(c==1)
 			{
-				//playerMove(players, slots, numSlots, c, a);
+				playerMove(players, slots, numSlots, &c, a);
 			}
 			else if(c==2)
 			{
@@ -86,5 +86,6 @@ int main(void)
 				c=-1;
 			}
 		}
+		c=-1;
 	}
 }

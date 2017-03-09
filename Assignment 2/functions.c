@@ -118,5 +118,66 @@ void playerStats(struct player player[], char* playerType[], int numPlayers)
 	}
 }
 
+void playerMove(struct player players[], struct slot slots[], int numSlots, int *c, int a)
+{
+	int moveChoice=-1;
+	if((slots[players[a].pos-1].occupied==true) && (slots[players[a].pos+1].occupied==true)) // If both adjacent slots are occupied, they can't move
+	{
+		printf("You are unable to move, you must attack.\n");
+		*c=2;
+	}
+	else if((slots[players[a].pos-1].occupied==true) && (players[a].pos==numSlots-1)) // If the player is on the rightmost side of the board (occupied)
+	{
+		printf("You are unable to move, you must attack.\n");
+		*c=2;
+	}
+	else if((slots[players[a].pos+1].occupied==true) && (players[a].pos==0)) // If the player is on the leftmost side of the board (occupied)
+	{
+		printf("You are unable to move, you must attack.\n");
+		*c=2;
+	}
+	else if((slots[players[a].pos-1].occupied==true) || (players[a].pos==0)) // If the player can't move left
+	{
+		slots[players[a].pos].occupied=false;
+		players[a].pos++;
+		slots[players[a].pos].occupied=true;
+		printf("You have moved to the right as you cannot move to the left.\nYou are now in position %d and type %s.\n", players[a].pos+1, slots[players[a].pos].type);
+	}
+	else if((slots[players[a].pos+1].occupied==true) || (players[a].pos==numSlots-1)) // If the player can't move right
+	{
+		slots[players[a].pos].occupied=false;
+		players[a].pos--;
+		slots[players[a].pos].occupied=true;
+		printf("You have moved to the left as you cannot move to the right.\nYou are now in position %d and type %s.\n", players[a].pos+1, slots[players[a].pos].type);
+	}
+	else
+	{
+		while(moveChoice<0) // Simple error checking
+		{
+			printf("Would you like to move to the left[1] (%s) or to the right[2] (%s)?\n", slots[players[a].pos-1].type, slots[players[a].pos+1].type);
+			scanf("%d", &moveChoice);
+			if(moveChoice==1) // Move to the left
+			{
+				slots[players[a].pos].occupied=false;
+				players[a].pos--;
+				slots[players[a].pos].occupied=true;
+				printf("You have moved to the left.\nYou are now in position %d and type %s.\n", players[a].pos+1, slots[players[a].pos].type);
+			}
+			else if(moveChoice==2) // Move to the right
+			{
+				slots[players[a].pos].occupied=false;
+				players[a].pos++;
+				slots[players[a].pos].occupied=true;
+				printf("You have moved to the right.\nYou are now in position %d and type %s.\n", players[a].pos+1, slots[players[a].pos].type);
+			}
+			else
+			{
+				printf("Invalid choice, please try again.\n");
+				moveChoice=-1;
+			}
+		}
+	}
+}
+
 
 
