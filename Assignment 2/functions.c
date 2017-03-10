@@ -13,6 +13,7 @@
 #include "functions.h"
 #define MAX_SIZE 50
 int i, j, c;
+char* slotsType[3]={"Level Ground", "Hill", "City"};
 
 void assignSlots(int numSlots, char* slotsType[], struct slot slots[])
 {
@@ -30,7 +31,7 @@ void playerPosition(int numPlayers, int numSlots, struct player players[], struc
 	for(i=0; i<numPlayers; i++)
 	{
 		j=rand()%numSlots;
-		while(slots[i].occupied==true) // Prevents 2 or more players being placed in the same slot
+		while(slots[j].occupied==true) // Prevents 2 or more players being placed in the same slot
 		{
 			j=rand()%numSlots;
 		}
@@ -141,14 +142,16 @@ void playerMove(struct player players[], struct slot slots[], int numSlots, int 
 		slots[players[a].pos].occupied=false;
 		players[a].pos++;
 		slots[players[a].pos].occupied=true;
-		printf("You have moved to the right as you cannot move to the left.\nYou are now in position %d and type %s.\n", players[a].pos, slots[players[a].pos].type);
+		printf("You have moved to the right as you cannot move to the left.\nYou are now in position %d of type %s.\n", players[a].pos+2, slots[players[a].pos].type);
+		playerMoveStats(players, slots, slotsType, a); // Assign new stats according to new slot type
 	}
 	else if((slots[players[a].pos+1].occupied==true) || (players[a].pos==numSlots-1)) // If the player can't move right
 	{
 		slots[players[a].pos].occupied=false;
 		players[a].pos--;
 		slots[players[a].pos].occupied=true;
-		printf("You have moved to the left as you cannot move to the right.\nYou are now in position %d and type %s.\n", players[a].pos, slots[players[a].pos].type);
+		printf("You have moved to the left as you cannot move to the right.\nYou are now in position %d of type %s.\n", players[a].pos, slots[players[a].pos].type);
+		playerMoveStats(players, slots, slotsType, a);
 	}
 	else
 	{
@@ -162,13 +165,15 @@ void playerMove(struct player players[], struct slot slots[], int numSlots, int 
 				players[a].pos--;
 				slots[players[a].pos].occupied=true;
 				printf("You have moved to the left.\nYou are now in position %d of type %s.\n", players[a].pos, slots[players[a].pos].type);
+				playerMoveStats(players, slots, slotsType, a);
 			}
 			else if(moveChoice==2) // Move to the right
 			{
 				slots[players[a].pos].occupied=false;
 				players[a].pos++;
 				slots[players[a].pos].occupied=true;
-				printf("You have moved to the right.\nYou are now in position %d of type %s.\n", players[a].pos, slots[players[a].pos].type);
+				printf("You have moved to the right.\nYou are now in position %d of type %s.\n", players[a].pos+2, slots[players[a].pos].type);
+				playerMoveStats(players, slots, slotsType, a);
 			}
 			else
 			{
@@ -256,7 +261,7 @@ void playerAttack(struct player players[], struct slot slots[], int *c, int a, i
 
 	if(leftSlot && !rightSlot) // If there is a player to the left only
 	{
-		printf("You are attacking the player to your left in slot %d.\n", (players[i].pos)-1);
+		printf("You are attacking the player to your left in slot %d.\n", players[a].pos);
 		for(b=0; b<numPlayers; b++) // Checking which player is beside the attacker
 		{
 			if(players[a].pos-1==players[b].pos)
@@ -277,7 +282,7 @@ void playerAttack(struct player players[], struct slot slots[], int *c, int a, i
 
 	if(!leftSlot && rightSlot) // If there is a player to the right only
 	{
-		printf("You are attacking the player to your right in slot %d.\n", (players[i].pos)+1);
+		printf("You are attacking the player to your right in slot %d.\n", players[a].pos+2);
 		for(b=0; b<numPlayers; b++)
 		{
 			if(players[a].pos+1==players[b].pos)
@@ -304,7 +309,7 @@ void playerAttack(struct player players[], struct slot slots[], int *c, int a, i
 			scanf("%d", &ch);
 			if(ch==1)
 			{
-				printf("You are attacking the player to your left in slot %d.\n", (players[i].pos)-1);
+				printf("You are attacking the player to your left in slot %d.\n", players[a].pos);
 				for(b=0; b<numPlayers; b++)
 				{
 					if(players[a].pos-1==players[b].pos)
@@ -324,7 +329,7 @@ void playerAttack(struct player players[], struct slot slots[], int *c, int a, i
 			}
 			else if(ch==2)
 			{
-				printf("You are attacking the player to your right in slot %d.\n", (players[i].pos)+1);
+				printf("You are attacking the player to your right in slot %d.\n", players[a].pos+2);
 				for(b=0; b<numPlayers; b++)
 				{
 					if(players[a].pos+1==players[b].pos)
@@ -353,13 +358,13 @@ void playerAttack(struct player players[], struct slot slots[], int *c, int a, i
 	if(!leftSlot && !rightSlot) // If there are no adjacent players
 	{
 		printf("There are no players beside you to attack, you have to move.\n");
-		*c=3; // Allow person to choose again
+		*c=6424; // Allow person to choose again, using garbage value so user doesn't input accidentally
 	}
 	for(a=0; a<numPlayers; a++)
 	{
 		if(players[a].health==0)
 		{
-			slots[players[a].pos].occupied=false;
+			slots[players[a].pos].occupied=false; // Mark slot as unoccupied if player dies
 			printf("Player %s has died!", players[a].name);
 		}
 	}
@@ -369,7 +374,7 @@ void playerHealth(int *x)
 {
 	if(*x<0)
 	{
-		*x=0;
+		*x=0; // Reset health to 0 if player drops below 0
 	}
 }
 
