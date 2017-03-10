@@ -81,10 +81,10 @@ void playerStats(struct player player[], char* playerType[], int numPlayers)
 					player[i].dexterity=1+(rand()%100);
 					player[i].luck=1+(rand()%100);
 					sum=player[i].magic+player[i].smartness+player[i].strength+player[i].dexterity+player[i].luck;
-					if(sum>=300) // If human attributes exceed cap
+					while(sum>=300) // If human attributes exceed cap
 					{
 						excess=sum-299;
-						excess=(excess/4)+1; // Divide the excess sum by 4 to allow attributes to go under 300, add 1 to fix integer division
+						excess=(excess/4)+1; // Divide the excess sum by 4 to allow sum of attributes to go under 300, add 1 to fix integer division
 						player[i].magic-=excess;
 						player[i].smartness-=excess;
 						player[i].strength-=excess;
@@ -95,6 +95,7 @@ void playerStats(struct player player[], char* playerType[], int numPlayers)
 						playerStatsBoundary(&player[i].strength);
 						playerStatsBoundary(&player[i].dexterity);
 						playerStatsBoundary(&player[i].luck);
+						sum=player[i].magic+player[i].smartness+player[i].strength+player[i].dexterity+player[i].luck;
 					}
 					break;
 
