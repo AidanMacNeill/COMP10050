@@ -316,7 +316,7 @@ void playerAttack(struct player players[], struct slot slots[], int *c, int a, i
 	{
 		while(ch<0) // Error checking
 		{
-			printf("Do you want to attack the player to your left[1] (slot %d) or the right[2] (slot %d)?\n", players[a].pos, players[a].pos+2);
+			printf("Do you want to attack the player to your left[1] (slot %d) or the right[2] (slot %d)?\n", players[a].pos, players[a].pos+2); // Add nothing and 2 to the position to allow the natural number system can be used (1,2....n)
 			scanf("%d", &ch);
 			if(ch==1)
 			{
