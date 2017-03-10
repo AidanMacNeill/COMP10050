@@ -61,7 +61,7 @@ int main(void)
 	{
 		printf("\nPlayer %d\nName: %s\nClass: %s\n", a+1, players[a].name, players[a].type); // Refer to values in each variable in the struct
 		printf("---Stats---\nHealth: %d\nMagic: %d\nSmartness: %d\nStrength: %d\nDexterity: %d\nLuck: %d\n", players[a].health, players[a].magic, players[a].smartness, players[a].strength, players[a].dexterity, players[a].luck);
-		printf("---Slots---\nStarting Position: %d\n", players[a].pos+1);
+		printf("---Slots---\nStarting Position: %d\n", players[a].pos+1); // Add 1 so it prints natural numbering (1,2...n) rather than zero indexed numbers
 	}
 
 	printf("\n---Let the game begin!---\n");
@@ -69,13 +69,12 @@ int main(void)
 	{
 		printf("\n%s, would you like to:\n[1]Move\n[2]Attack\n", players[a].name);
 
-		while(c<0)
+		while(c<0) // Error checking
 		{
 			scanf("%d", &c);
 			if(c==1)
 			{
 				playerMove(players, slots, numSlots, &c, a);
-
 			}
 			if(c==2)
 			{
@@ -93,7 +92,7 @@ int main(void)
 		}
 		c=-1;
 	}
-	printf("\nThe game has finished!\n---Final Stats---\n\n");
+	printf("\nThe game has finished!\n---Final Stats---\n\n"); // Print health of each player after game ends
 	for(a=0; a<numPlayers; a++)
 	{
 		printf("%s (%s, %d)\n", players[a].name, players[a].type, players[a].health);

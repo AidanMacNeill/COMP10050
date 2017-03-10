@@ -6,5 +6,6 @@
 4. Slot attack logic DONE
 5. Attack implementation DONE
 6. Bugfixes DONE
-7. Quality of Life/Formatting
-8. Comment
+7. Quality of Life/Formatting DONE
+8. Comment DONE
+#OgreTooOP

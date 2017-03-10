@@ -55,6 +55,7 @@ void playerInit(int numPlayers, struct player players[], char* playerType[])
 
 void playerStats(struct player player[], char* playerType[], int numPlayers)
 {
+	int sum, excess; // Sum and Excess variables to check values for Human type
 	for(i=0; i<numPlayers; i++)
 	{
 		for(j=0; j<4; j++) // Checks the class the player has
@@ -74,25 +75,26 @@ void playerStats(struct player player[], char* playerType[], int numPlayers)
 
 				case 1: // Human
 					player[i].health=100;
+					player[i].magic=1+(rand()%100);
+					player[i].smartness=1+(rand()%100);
+					player[i].strength=1+(rand()%100);
 					player[i].dexterity=1+(rand()%100);
 					player[i].luck=1+(rand()%100);
-					if(player[i].dexterity+player[i].luck > 102)
+					sum=player[i].magic+player[i].smartness+player[i].strength+player[i].dexterity+player[i].luck;
+					if(sum>=300) // If human attributes exceed cap
 					{
-						player[i].magic=1+(rand()%100); // Stop the attributes from exceeding the cap for the Human type
-					}
-					else
-					{
-						player[i].magic=1+(rand()%98);
-					}
-					player[i].smartness=1+(rand()%(299-player[i].dexterity-player[i].luck-player[i].magic));
-					if(player[i].smartness>100)
-					{
-						player[i].smartness=100;
-					}
-					player[i].strength=1+(rand()%(299-player[i].dexterity-player[i].luck-player[i].magic-player[i].smartness));
-					if(player[i].strength>100)
-					{
-						player[i].strength=100;
+						excess=sum-299;
+						excess=(excess/4)+1; // Divide the excess sum by 4 to allow attributes to go under 300, add 1 to fix integer division
+						player[i].magic-=excess;
+						player[i].smartness-=excess;
+						player[i].strength-=excess;
+						player[i].dexterity-=excess;
+						player[i].luck-=excess;
+						playerStatsBoundary(&player[i].magic); // Prevent stats from going below 1
+						playerStatsBoundary(&player[i].smartness);
+						playerStatsBoundary(&player[i].strength);
+						playerStatsBoundary(&player[i].dexterity);
+						playerStatsBoundary(&player[i].luck);
 					}
 					break;
 

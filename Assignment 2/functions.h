@@ -10,7 +10,7 @@
 #define MAX_SIZE 50
 #include <stdbool.h>
 
-struct player
+struct player // Struct for players with all relevant datatypes
 {
 	char name[MAX_SIZE];
 	char type[MAX_SIZE];
@@ -23,7 +23,7 @@ struct player
 	int pos;
 };
 
-struct slot
+struct slot // Struct for slots with all relevant datatypes
 {
 	int id;
 	char type[MAX_SIZE];
