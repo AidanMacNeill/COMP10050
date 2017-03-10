@@ -2,7 +2,7 @@
  * functions.h
  *
  *  Created on: 4 Mar 2017
- *      Author: aidan
+ *      Authors: Aidan Mac Neill (16349586) & Dalen Gumpal (16367713)
  */
 
 #ifndef FUNCTIONS_H_
