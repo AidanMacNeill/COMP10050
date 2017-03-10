@@ -43,4 +43,8 @@ void playerMove(struct player players[], struct slot slots[], int numSlots, int 
 void playerMoveStats(struct player players[], struct slot slots[], char* slotsType[], int a);
 
 void playerStatsBoundary(int *x);
+
+void playerAttack(struct player players[], struct slot slots[], int *c, int a, int numPlayers);
+
+void playerHealth(int *x);
 #endif /* FUNCTIONS_H_ */

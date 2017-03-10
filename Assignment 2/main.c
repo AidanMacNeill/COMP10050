@@ -61,7 +61,7 @@ int main(void)
 	{
 		printf("\nPlayer %d\nName: %s\nClass: %s\n", a+1, players[a].name, players[a].type); // Refer to values in each variable in the struct
 		printf("---Stats---\nHealth: %d\nMagic: %d\nSmartness: %d\nStrength: %d\nDexterity: %d\nLuck: %d\n", players[a].health, players[a].magic, players[a].smartness, players[a].strength, players[a].dexterity, players[a].luck);
-		printf("---Slots---\nStarting Position: %d\n", players[a].pos+1);
+		printf("---Slots---\nStarting Position: %d\n", players[a].pos);
 	}
 
 	printf("\n---Let the game begin!---\n");
@@ -79,7 +79,12 @@ int main(void)
 			}
 			else if(c==2)
 			{
-				// TODO attack implementation
+				playerAttack(players, slots, &c, a, numPlayers);
+			}
+			else if(c==3) // If the player chooses to attack and they are unable to, allow them to choose again
+			{
+				a--;
+				c=-1;
 			}
 			else
 			{
@@ -88,5 +93,10 @@ int main(void)
 			}
 		}
 		c=-1;
+	}
+	printf("\nThe game has finished!\n---Final Stats---\n\n");
+	for(a=0; a<numPlayers; a++)
+	{
+		printf("%s (%s, %d)\n", players[a].name, players[a].type, players[a].health);
 	}
 }
