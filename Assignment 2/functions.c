@@ -258,11 +258,11 @@ void playerAttack(struct player players[], struct slot slots[], int *c, int a, i
 	{
 		rightSlot=true;
 	}
-	if(players[a].pos==0)
+	if(players[a].pos==0) // Stop player from attacking to the left in slot 0
 	{
 		leftSlot=false;
 	}
-	if(players[a].pos==numSlots-1)
+	if(players[a].pos==numSlots-1) // Stop player from attacking to the right in the max slot
 	{
 		rightSlot=false;
 	}
