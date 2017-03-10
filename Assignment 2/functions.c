@@ -142,7 +142,7 @@ void playerMove(struct player players[], struct slot slots[], int numSlots, int 
 		slots[players[a].pos].occupied=false;
 		players[a].pos++;
 		slots[players[a].pos].occupied=true;
-		printf("You have moved to the right as you cannot move to the left.\nYou are now in position %d of type %s.\n", players[a].pos+2, slots[players[a].pos].type);
+		printf("You have moved to the right as you cannot move to the left.\nYou are now in position %d of type %s.\n", players[a].pos, slots[players[a].pos].type);
 		playerMoveStats(players, slots, slotsType, a); // Assign new stats according to new slot type
 	}
 	else if((slots[players[a].pos+1].occupied==true) || (players[a].pos==numSlots-1)) // If the player can't move right
@@ -172,7 +172,7 @@ void playerMove(struct player players[], struct slot slots[], int numSlots, int 
 				slots[players[a].pos].occupied=false;
 				players[a].pos++;
 				slots[players[a].pos].occupied=true;
-				printf("You have moved to the right.\nYou are now in position %d of type %s.\n", players[a].pos+2, slots[players[a].pos].type);
+				printf("You have moved to the right.\nYou are now in position %d of type %s.\n", players[a].pos, slots[players[a].pos].type);
 				playerMoveStats(players, slots, slotsType, a);
 			}
 			else
@@ -282,7 +282,7 @@ void playerAttack(struct player players[], struct slot slots[], int *c, int a, i
 
 	if(!leftSlot && rightSlot) // If there is a player to the right only
 	{
-		printf("You are attacking the player to your right in slot %d.\n", players[a].pos+2);
+		printf("You are attacking the player to your right in slot %d.\n", players[a].pos);
 		for(b=0; b<numPlayers; b++)
 		{
 			if(players[a].pos+1==players[b].pos)
@@ -309,7 +309,7 @@ void playerAttack(struct player players[], struct slot slots[], int *c, int a, i
 			scanf("%d", &ch);
 			if(ch==1)
 			{
-				printf("You are attacking the player to your left in slot %d.\n", players[a].pos);
+				printf("You are attacking the player to your left in slot %d.\n", players[a].pos+1);
 				for(b=0; b<numPlayers; b++)
 				{
 					if(players[a].pos-1==players[b].pos)
@@ -329,7 +329,7 @@ void playerAttack(struct player players[], struct slot slots[], int *c, int a, i
 			}
 			else if(ch==2)
 			{
-				printf("You are attacking the player to your right in slot %d.\n", players[a].pos+2);
+				printf("You are attacking the player to your right in slot %d.\n", players[a].pos+1);
 				for(b=0; b<numPlayers; b++)
 				{
 					if(players[a].pos+1==players[b].pos)
