@@ -40,7 +40,7 @@ int main(void)
 	if (numSlots > 20)
 	{
 		numSlots=20;
-		printf("The number of slots was sent to the maximum allowed value of 20");
+		printf("The number of slots was sent to the maximum allowed value of 20"); // Prevents numSlots exceeding the max
 	}
 	printf("\n");
 
