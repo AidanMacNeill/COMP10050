@@ -30,21 +30,21 @@ struct slot
 	_Bool occupied;
 };
 
-void assignSlots(int numSlots, char* slotsType[], struct slot slots[]); //TODO test
+void assignSlots(int numSlots, char* slotsType[], struct slot slots[]); // Assign slot types to each slot
 
-void playerPosition(int numPlayers, int numSlots, struct player players[], struct slot slots[]);
+void playerPosition(int numPlayers, int numSlots, struct player players[], struct slot slots[]); // Assign players to unique positions
 
-void playerInit(int numPlayers, struct player players[], char* playerType[]);
+void playerInit(int numPlayers, struct player players[], char* playerType[]); // Setup for player names and types
 
-void playerStats(struct player player[], char* playerType[], int numPlayers);
+void playerStats(struct player player[], char* playerType[], int numPlayers); // Initialise player stats
 
-void playerMove(struct player players[], struct slot slots[], int numSlots, int *c, int a);
+void playerMove(struct player players[], struct slot slots[], int numSlots, int *c, int a); // Move players
 
-void playerMoveStats(struct player players[], struct slot slots[], char* slotsType[], int a);
+void playerMoveStats(struct player players[], struct slot slots[], char* slotsType[], int a); // Change stats depending on slot types
 
-void playerStatsBoundary(int *x);
+void playerStatsBoundary(int *x); // Stops stats from going over threshold
 
-void playerAttack(struct player players[], struct slot slots[], int *c, int a, int numPlayers);
+void playerAttack(struct player players[], struct slot slots[], int *c, int a, int numPlayers, int numSlots); // Player Attack function
 
-void playerHealth(int *x);
+void playerHealth(int *x); // Resets player health to 0 if drops below
 #endif /* FUNCTIONS_H_ */
